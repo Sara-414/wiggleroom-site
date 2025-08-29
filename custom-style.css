@@ -1,0 +1,660 @@
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Kill dark overlay and theme filters */
+.has-header-image .overlay,
+.panel-image::before,
+.panel-image::after {
+    display: none !important;
+    content: none !important;
+    background: none !important;
+}
+
+
+/* makes image clearer */
+
+.has-header-image .custom-header-media img {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+
+/* Random attempts at fixing featured images */
+
+.panel-image {
+  background-color: transparent !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+
+.panel-image {
+  filter: none !important;
+  -webkit-filter: none !important;
+  opacity: 1 !important;
+}
+
+
+/* General dark theme adjustments */
+.tribe-events-widget h1, span,
+.tribe-events-widget-events-list h2,
+.tribe-common-b2,
+.tribe-events-calendar-list time,
+.tribe-common a,
+.tribe-events-meta-group h2, abbr, dt, dd,
+.tribe-events-start-time-label,
+.tribe-events-start-date-label,
+.tribe-events-c-view-selector span,
+.tribe-events-c-top-bar a,
+#tribe-events-subscribe-dropdown-content a,
+#tribe-events-c-subscribe-dropdown-content a,
+#tribe-events-footer a,
+.tribe-events-single a,
+.tribe-common-h7,
+.entry-header a,
+.tribe-events-single-section-title {
+  color: #eee !important;
+}
+
+.search-field {
+  color: #333 !important;
+}
+
+.page-header {
+  padding-top: 5em;
+}
+
+/* override for view toggle (List, Month, Day) background color */
+
+.tribe-events-c-top-bar a, .tribe-events-c-view-selector span {
+	color: #333 !important;
+}
+
+
+/* Force calendar icon and dropdown arrow to appear white */
+.tribe-events .tribe-common-c-svgicon path,
+.tribe-events .tribe-events-c-top-bar__datepicker-button svg path {
+  fill: #eee !important;
+  stroke: #eee !important;
+}
+
+
+
+/* "Add to Calendar" dropdown menu */
+#tribe-events-subscribe-dropdown-content a,
+#tribe-events-c-subscribe-dropdown-content a {
+  color: #eee !important;
+  background-color: #444 !important;
+  border: none;
+}
+
+#tribe-events-subscribe-dropdown-content a:hover,
+#tribe-events-c-subscribe-dropdown-content a:hover {
+  background-color: #555 !important;
+  color: #eee !important;
+}
+
+/* List dropdown calendar fix */
+
+/* Match datepicker to site’s dark theme */
+.tribe-events .datepicker,
+.tribe-events .datepicker table,
+.tribe-events .datepicker table tr td,
+.tribe-events .datepicker table tr th {
+  background-color: #222 !important;
+  color: #eee !important;
+  border-color: #444 !important;
+}
+
+/* Hover and active dates */
+.tribe-events .datepicker table tr td.active,
+.tribe-events .datepicker table tr td.active:hover {
+  background-color: #555 !important;
+  color: #fff !important;
+}
+
+.tribe-events .datepicker table tr td:hover {
+  background-color: #444 !important;
+  color: #fff !important;
+}
+
+/* Navigation arrows */
+.tribe-events .datepicker .prev,
+.tribe-events .datepicker .next,
+.tribe-events .datepicker .datepicker-switch {
+  color: #eee !important;
+}
+
+/* Optional: add subtle border to the calendar */
+.tribe-events .datepicker {
+  border: 1px solid #555 !important;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Prevent day headers from wrapping on month view */
+.tribe-events-calendar-month__header-column-title {
+  white-space: nowrap !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  height: 2em;
+}
+
+/* Ensure mobile day abbreviations stay on one line */
+.tribe-events-calendar-month__header-column-title-mobile {
+  white-space: nowrap !important;
+  display: inline-block;
+  font-size: 0.85em;
+}
+
+
+
+/* EVENT POSTERS GRID FIX */
+
+/* === FULL SCREEN WIDTH POSTER ROW for ECS Event List === */
+
+/* Breakout container from page width constraints */
+
+.ecs-event-list {
+	width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  list-style: none;
+  padding: 20px 0;
+  background: #333;
+  overflow-x: auto;
+}
+
+
+body, html {
+  overflow-x: hidden;
+}
+
+
+/* swipeable horizontal event poster scroll */
+
+@media (min-width: 768px) {
+  .ecs-event-list {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 20px;
+    padding-bottom: 10px;
+  }
+
+  .ecs-event {
+	
+    flex: 0 0 calc(25% - 16px);
+		/* 5 items per row with spacing */
+    scroll-snap-align: start;
+  }
+}
+
+
+@media (max-width: 767px) {
+  .ecs-event-list {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding-bottom: 10px;
+  }
+
+  .ecs-event {
+    flex: 0 0 auto;
+    width: 80%;
+    scroll-snap-align: start;
+  }
+}
+
+/* Individual event poster card styling */
+.ecs-event {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #333;
+  padding: 10px;
+}
+
+.ecs-event:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+/* Poster image inside event card */
+.ecs-event img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* Event title link (above poster) — fixed color & wrapping */
+.entry-title.summary a {
+  font-family: 'TAY Road Runner', sans-serif;
+  color: #eee !important;
+  text-decoration: none;
+  display: inline-block;
+  /*
+  max-width: 100%;
+  width: auto;*/
+  white-space: normal;
+  overflow: visible;
+  word-break: break-word;
+}
+
+.entry-title.summary a:hover {
+  color: #eee !important;
+  text-decoration: underline;
+}
+
+/* Event date text under poster */
+.ecs-event-datetime {
+  font-size: 0.9rem;
+  color: #eee !important;
+}
+
+/* Optional: Event title under poster if applicable */
+.ecs-event-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #eee !important;
+  margin-bottom: 5px;
+}
+
+
+/* === SCROLL ARROW + MOBILE WRAPPER === */
+
+.ecs-event-wrapper {
+  position: relative;
+}
+
+.scroll-arrow {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  padding: 8px 12px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.2rem;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-arrow::before {
+  content: '➔'; /* Unicode arrow character */
+  font-size: 1.5rem;
+}
+
+.ecs-event-wrapper.scrolled .scroll-arrow {
+  opacity: 0;
+}
+
+/* Style the featured event image on single event pages */
+.tribe-event-featured-image img {
+  width: 100%;
+  max-width: 600px;
+  display: block;
+  margin: 0 auto 1.5em auto;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+/* Optional: Add a little spacing around the image wrapper */
+.tribe-event-featured-image {
+  padding: 20px 0;
+  text-align: center;
+}
+
+
+/* === Match poster image styling for default Events List === */
+
+.tribe-events-calendar-list img, .tribe-events-event-image img,
+.tribe-events-list .tribe-events-event-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 1px #eee;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tribe-events-calendar-list img:hover,
+.tribe-events-list .tribe-events-event-image img:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 2px 8px #eee;
+}
+
+/* attempt to align posters at the top */
+
+
+
+/* Color of Contact Links in Footer*/
+
+footer .open-contact-form, .open-event-form {
+  color: #eee !important;
+}
+
+/* Changes to contact form itself */
+
+/* Popup text color */
+#pum-356 .pum-content,
+#pum-356 .pum-content * {
+  color: #333 !important;
+}
+#pum-369 .pum-content,
+#pum-369 .pum-content * {
+  color: #333 !important;
+}
+
+/* Style the WPForms submit button inside Popup 356 */
+#pum-356 #pum-369 .wpforms-submit {
+  background-color: #444 !important; 
+	/* Button background */
+  color: #eee !important; 
+	/* Button text color */
+  border: none !important;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Optional: change on hover */
+#pum-356 #pum-369 .wpforms-submit:hover {
+  background-color: #eee !important;
+  color: #fff !important;
+}
+
+/* Underline on hover for forms */
+
+footer .open-contact-form, .open-event-form {
+  position: relative;
+  text-decoration: none;
+}
+
+footer .open-contact-form::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #D887F1; /* Custom line color */
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: left;
+}
+
+footer .open-contact-form:hover::after {
+  transform: scaleX(1);
+}
+
+footer .open-event-form::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #89d0ea; /* Custom line color */
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: left;
+}
+
+footer .open-event-form:hover::after {
+  transform: scaleX(1);
+}
+
+.has-header-image .custom-header-media::before {
+  background: none !important;
+}
+
+/* DARKEN MONTH DROPDOWN BACKGROUND */
+.tribe-events .datepicker-dropdown {
+  background-color: #222 !important;
+  color: #fff !important;
+  border: 1px solid #555;
+}
+
+/* DEFAULT MONTH & YEAR TEXT IN DROPDOWN */
+.tribe-events .datepicker-dropdown .datepicker-months .month,
+.tribe-events .datepicker-dropdown .datepicker-years .year {
+  color: #ccc !important;
+  font-weight: 500;
+}
+
+/* HOVER EFFECT FOR MONTH & YEAR OPTIONS */
+.tribe-events .datepicker-dropdown .datepicker-months .month:hover,
+.tribe-events .datepicker-dropdown .datepicker-years .year:hover {
+  background-color: #444 !important;
+  color: #fff !important;
+  cursor: pointer;
+}
+
+/* Make year (e.g., "2025") visible in datepicker dropdown */
+.tribe-events .datepicker-dropdown .datepicker-switch {
+  color: #eee !important;  /* or pick a contrasting brand color */
+  background-color: #222 !important; /* match dropdown background */
+  font-weight: 500;
+}
+
+
+
+/* MOBILE STYLES */
+
+/* Fix mobile cropping of header image in Twenty Seventeen */
+@media (max-width: 767px) {
+
+  /* General header container styles */
+  .custom-header,
+  .custom-header-media,
+  .custom-header-image {
+    padding-top: 0 !important;
+    height: auto !important;
+    min-height: 26vh !important;
+    max-height: none !important;
+    width: 100% !important;
+    overflow: visible !important;
+    position: relative !important;
+  }
+
+  /* Header image display */
+  .custom-header-media img,
+  .custom-header-image img,
+  .wp-custom-header img,
+  .has-header-image .custom-header-image,
+  .has-post-thumbnail .custom-header-media {
+    display: block !important;
+    height: auto !important;
+    width: 100% !important;
+    object-fit: contain !important;
+    object-position: top center !important;
+  }
+
+  /* Homepage-specific header image treatment */
+  .home .custom-header-media {
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    height: auto !important;
+  }
+
+  /* Video headers: make sure they're shown */
+  .has-header-video .custom-header-media {
+    display: block !important;
+  }
+
+  /* Branding spacing */
+  .site-branding {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Logo sizing */
+  .site-branding img {
+    height: 45px;
+    width: auto;
+  }
+
+  /* Tweak inner page header spacing */
+  body:not(.home) .custom-header,
+  body:not(.home) .custom-header-media,
+  body:not(.home) .custom-header-image {
+    height: 22vh !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Inner pages only: position branding in bottom-left */
+  body:not(.home) .site-branding {
+    position: absolute !important;
+  }
+
+}
+
+/* Attempt to optimize header image for desktop */
+
+@media (min-width: 768px) {
+  .has-header-image .custom-header-media img {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    min-width: auto !important;
+    min-height: auto !important;
+    padding-bottom: 0 !important;
+    object-fit: contain !important;
+    image-rendering: auto !important;
+    filter: none !important;
+    opacity: 1 !important;
+    display: block !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .has-header-image .custom-header-media {
+    position: relative !important;
+    height: auto !important;
+    overflow: visible !important;
+    max-height: none !important;
+  }
+}
+
+/* trying summin */
+
+@media (min-width: 768px) {
+	/* Inner pages: match homepage header overlay behavior */
+	body:not(.home) .custom-header,
+	body:not(.home) .custom-header-media,
+	body:not(.home) .custom-header-image {
+  height: 65vh !important; 
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  position: relative !important; /* Ensure stacking context */
+  overflow: hidden !important;
+	}
+
+/* Put site-branding inside header image like homepage */
+	body:not(.home) .site-branding 	{
+  position: absolute !important;
+  bottom: 40px; 
+  left: 40px; 
+  z-index: 2;
+	}
+
+/* Ensure the image behaves consistently */
+	body:not(.home) .has-header-image .custom-header-media img {
+  object-fit: cover !important;
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  z-index: 1;
+	}
+
+}
+
+@media (min-width: 1024px) {
+		body:not(.home) .custom-header,
+	body:not(.home) .custom-header-media,
+	body:not(.home) .custom-header-image {
+  height: 90vh !important; 
+	}
+
+}
+
+@media (min-width: 1200px) {
+		body:not(.home) .custom-header,
+	body:not(.home) .custom-header-media,
+	body:not(.home) .custom-header-image {
+  height: 100vh !important; 
+	}
+
+}
+
+/* Fix poster/title alignment */
+
+.ecs-event {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  text-align: center;
+}
+
+/* Set fixed height for poster container */
+.event-poster-wrapper {
+  flex-grow: 0;
+  align-self: stretch;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+	padding-top: .5em;
+}
+
+
+.ecs-event {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.ecs-event .entry-title {
+  min-height: 6em; /* enough for 2 lines of text */
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: center;
+}
+
